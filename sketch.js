@@ -5,12 +5,6 @@
 // Game of Life
 // Video: https://youtu.be/FWSR_7kZuYg
 
-let pause = true;
-
-function setPause() {
-  pause = !pause;
-}
-
 function make2DArray(cols, rows) {
   let arr = new Array(cols);
   for (let i = 0; i < arr.length; i++) {
@@ -19,6 +13,7 @@ function make2DArray(cols, rows) {
   return arr;
 }
 
+let pause = true;
 let grid;
 let cols;
 let rows;
@@ -80,12 +75,6 @@ function draw() {
   }
 }
 
-function step() {
-  pause = false;
-  draw();
-  pause = true;
-}
-
 function countNeighbors(grid, x, y) {
   let sum = 0;
   for (let i = -1; i < 2; i++) {
@@ -97,4 +86,23 @@ function countNeighbors(grid, x, y) {
   }
   sum -= grid[x][y];
   return sum;
+}
+
+// Mouse Functions
+
+function mouseClicked() {
+  //alert(mouseX + ", " + mouseY);
+  
+}
+
+// Button Functions
+
+function step() {
+  pause = false;
+  draw();
+  pause = true;
+}
+
+function setPause() {
+  pause = !pause;
 }
