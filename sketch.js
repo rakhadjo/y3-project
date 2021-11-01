@@ -24,18 +24,22 @@ let cols;
 let rows;
 let resolution = 10;
 
-function setup() {
-  createCanvas(600, 400);
-  background(0);
-  cols = width / resolution;
-  rows = height / resolution;
-
-  grid = make2DArray(cols, rows);
+function generateCells(grid) {
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       grid[i][j] = floor(random(2));
     }
   }
+}
+
+function setup() {
+  createCanvas(600, 400);
+  background(0);
+  cols = width / resolution;
+  rows = height / resolution;
+  grid = make2DArray(cols, rows);
+  generateCells(grid);
+  step();
 }
 
 function draw() {
@@ -61,7 +65,6 @@ function draw() {
       for (let j = 0; j < rows; j++) {
         let state = grid[i][j];
         // Count live neighbors!
-        let sum = 0;
         let neighbors = countNeighbors(grid, i, j);
 
         if (state == 0 && neighbors == 3) {
@@ -75,6 +78,12 @@ function draw() {
     }
     grid = next;
   }
+}
+
+function step() {
+  pause = false;
+  draw();
+  pause = true;
 }
 
 function countNeighbors(grid, x, y) {
