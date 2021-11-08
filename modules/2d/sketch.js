@@ -19,10 +19,10 @@ let cols;
 let rows;
 let resolution = 10;
 
-function generateCells(grid) {
+function generateCells(grid, states) {
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      grid[i][j] = floor(random(2));
+      grid[i][j] = floor(random(states));
     }
   }
 }
@@ -33,8 +33,19 @@ function setup() {
   cols = width / resolution;
   rows = height / resolution;
   grid = make2DArray(cols, rows);
-  generateCells(grid);
+  let states = document.getElementById("states").value || 2;
+  generateCells(grid, states);
   step();
+}
+
+function colorBank(states) {
+  let bank = [];
+
+  for (let i = 5; i < states; i++) {
+    bank.push(i);
+  }
+
+  return bank;
 }
 
 function draw() {
@@ -92,7 +103,6 @@ function countNeighbors(grid, x, y) {
 
 function mouseClicked() {
   //alert(mouseX + ", " + mouseY);
-  
 }
 
 // Button Functions
