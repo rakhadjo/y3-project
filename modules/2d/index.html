@@ -4,8 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Two Dimension Cellular Automata</title>
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+    ></script>
+
+    <script type="text/javascript" src="rules.json"></script>
     <script src="../../libraries/p5.js"></script>
-	<script src="sketch.js"></script>
+    <script type="text/javascript" src="sketch.js"></script>
     <style>
       body {
         margin: 0;
@@ -22,8 +28,11 @@
     <button onclick="step()">Single Step</button>
     <input type="number" id="states" name="states_input" />
     <button onclick="setup();">Apply</button>
-	<br> <br>
-	<label id="states_count">Number of States: 2</label> <br>
-	<label id="colors_bank">Color List in Hex Here</label>
+    <br />
+    <br />
+    <label id="states_count">Number of States: 2</label> <br />
+    <label id="colors_bank">Color List in Hex Here</label>
+    <br />
+    <label id="gen_count">Generation: 0</label>
   </body>
 </html>
