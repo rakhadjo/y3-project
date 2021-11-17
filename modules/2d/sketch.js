@@ -1,28 +1,3 @@
-let rulesets = {
-  0: {
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 1,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-  },
-  1: {
-    0: 0,
-    1: 0,
-    2: 1,
-    3: 1,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-  },
-};
-
 function make2DArray(cols, rows) {
   let arr = new Array(cols);
   for (let i = 0; i < arr.length; i++) {
@@ -55,7 +30,7 @@ function setup(k = 2) {
   document.getElementById("states_count").innerHTML =
     "Number of States: " + states;
   colors = colorBank(states);
-  cnv = createCanvas(1200, 800);
+  cnv = createCanvas(windowWidth/2, 600);
   centerCanvas();
   background(0);
   cols = width / resolution;
@@ -106,28 +81,8 @@ function draw() {
       }
     }
 
-    
-
     // Compute next based on grid
-    /*
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        let state = grid[i][j];
-        // Count live neighbors!
-        let neighbors = countNeighbors(grid, i, j);
-        
-        if (state == 0 && neighbors == 3) {
-          next[i][j] = 1;
-        } else if (state == 1 && (neighbors < 2 || neighbors > 3)) {
-          next[i][j] = 0;
-        } else {
-          next[i][j] = state;
-        }
-      }
-    }
-    grid = next;
-    */
-   grid = applyRule(grid, rulesets);
+    grid = applyRule(grid, rulesets);
     document.getElementById("gen_count").innerHTML =
       "Generation: " + (generationCount - 1);
   }
@@ -150,7 +105,7 @@ function applyRule(current, rules) {
   let next = make2DArray(cols, rows);
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      next[i][j] = rules[current[i][j]][countNeighbors(current, i, j)]
+      next[i][j] = rules[current[i][j]][countNeighbors(current, i, j)];
     }
   }
   return next;
