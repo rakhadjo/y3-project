@@ -1,10 +1,3 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-
-// Game of Life
-// Video: https://youtu.be/FWSR_7kZuYg
-
 function make2DArray(cols, rows) {
   let arr = new Array(cols);
   for (let i = 0; i < arr.length; i++) {
@@ -17,6 +10,8 @@ let pause = true;
 let grid;
 let cols;
 let rows;
+let cnv; // THIS IS THE CANVAS!!
+let colors;
 let resolution = 10;
 
 function generateCells(grid, states) {
@@ -27,28 +22,45 @@ function generateCells(grid, states) {
   }
 }
 
-function setup() {
-  createCanvas(600, 400);
+function setup(k = 2) {
+  // get the number of states
+  let states = document.getElementById("states").value || 2;  
+  document.getElementById("states_count").innerHTML = "Number of States: " + states;
+  colors = colorBank(states);
+  cnv = createCanvas(1200, 800);
+  centerCanvas();
   background(0);
   cols = width / resolution;
   rows = height / resolution;
   grid = make2DArray(cols, rows);
-  let states = document.getElementById("states").value || 2;
   generateCells(grid, states);
   step();
 }
 
+// generate random colors according to number of states
 function colorBank(states) {
   let bank = [];
-
-  for (let i = 5; i < states; i++) {
-    bank.push(i);
+  if (states == 2) {
+    document.getElementById("colors_bank").innerHTML = "Default Blank & White";
+    return [0, 255];
   }
-
+  for (let i = 0; i < states; i++) {
+    let rand_color = [floor(random(255)), floor(random(255)), floor(random(255))];
+    while (bank.includes(rand_color)) {
+      rand_color = [floor(random(255)), floor(random(255)), floor(random(255))];
+    }
+    bank.push(rand_color);
+  }
+  let output = "";
+  bank.forEach(color => {
+    output += `(${color[0]}, ${color[1]} , ${color[0]})\n`
+  });
+  document.getElementById("colors_bank").innerHTML = output;
   return bank;
 }
 
 function draw() {
+  //console.log("Drawing...");
   if (!pause) {
     background(0);
 
@@ -56,11 +68,11 @@ function draw() {
       for (let j = 0; j < rows; j++) {
         let x = i * resolution;
         let y = j * resolution;
-        if (grid[i][j] == 1) {
-          fill(255);
+        //console.log("grid["+i+"]["+j+"] = " + grid[i][j]);
+          fill(colors[grid[i][j]]);
           stroke(0);
           rect(x, y, resolution - 1, resolution - 1);
-        }
+        
       }
     }
 
@@ -115,4 +127,16 @@ function step() {
 
 function setPause() {
   pause = !pause;
+}
+
+// util functions
+
+function centerCanvas() {
+  var x = (windowWidth - width) / 2;
+  var y = (windowHeight - height) / 2;
+  cnv.position(x, y);
+}
+
+function windowResized() {
+  centerCanvas();
 }
