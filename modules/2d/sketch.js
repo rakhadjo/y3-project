@@ -75,6 +75,7 @@ function draw() {
       for (let j = 0; j < rows; j++) {
         let x = i * resolution;
         let y = j * resolution;
+        //console.log("NGENTOT ANJING: " + grid[i][j])
         fill(colors[grid[i][j]]);
         stroke(0);
         rect(x, y, resolution - 1, resolution - 1);
@@ -88,7 +89,7 @@ function draw() {
   }
 }
 
-function countNeighbors(grid, x, y) {
+function countNeighbors(grid, x, y, units) {
   let res = {};
   for (let i = -1; i < 2; i++) {
     for (let j = -1; j < 2; j++) {
@@ -105,26 +106,12 @@ function countNeighbors(grid, x, y) {
   return res;
 }
 
-function countNeighbors_alpha(grid, x, y) {
-  let sum = 0;
-  for (let i = -1; i < 2; i++) {
-    for (let j = -1; j < 2; j++) {
-      let col = (x + i + cols) % cols;
-      let row = (y + j + rows) % rows;
-      sum += grid[col][row];
-    }
-  }
-  sum -= grid[x][y];
-  return sum;
-}
-
 function applyRule(current, rules) {
   let next = make2DArray(cols, rows);
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      //next[i][j] = rules[current[i][j]][countNeighbors(current, i, j)];
       next[i][j] = rules[current[i][j]].nextState(
-        countNeighbors(current, i, j)
+        countNeighbors(current, i, j, 0)
       );
     }
   }
