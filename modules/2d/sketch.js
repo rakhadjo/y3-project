@@ -7,6 +7,9 @@ let colors;
 let resolution = 10;
 let generationCount = 0;
 
+let active_rules; // rules to be applied
+let depth; // how far you should look outwards
+
 function make2DArray(cols, rows) {
   let arr = new Array(cols);
   for (let i = 0; i < arr.length; i++) {
@@ -23,12 +26,26 @@ function generateCells(grid, states) {
   }
 }
 
+function determine_rules(states) {
+  switch (states) {
+    case 5:
+      return fire_1;
+    case 6:
+      return fire_1;
+    default:
+      return cgol_rules;
+  }
+}
+
 function setup(k = 2) {
   // get the number of states
   generationCount = 0;
-  let states = document.getElementById("states").value || 2;
+  let states = parseInt(document.getElementById("states").value) || 2;
+  depth = parseInt(document.getElementById("depth").value) || 1;
   document.getElementById("states_count").innerHTML =
     "Number of States: " + states;
+  document.getElementById("depth_count").innerHTML = "Depth: " + depth;
+  active_rules = determine_rules(states);
   colors = colorBank(states);
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
@@ -83,16 +100,16 @@ function draw() {
     }
 
     // Compute next based on grid
-    grid = applyRule(grid, rulesets);
+    grid = applyRule(grid, active_rules);
     document.getElementById("gen_count").innerHTML =
       "Generation: " + (generationCount - 1);
   }
 }
 
-function countNeighbors(grid, x, y, units) {
-  let res = {};
-  for (let i = -1; i < 2; i++) {
-    for (let j = -1; j < 2; j++) {
+function countNeighbors(grid, x, y, inp_depth) {
+  let res = {}; // neighbour types
+  for (let i = -1 - inp_depth; i < 2 + inp_depth; i++) {
+    for (let j = -1 - inp_depth; j < 2 + inp_depth; j++) {
       let col = (x + i + cols) % cols;
       let row = (y + j + rows) % rows;
       if (!(grid[col][row] in res)) {
@@ -110,9 +127,7 @@ function applyRule(current, rules) {
   let next = make2DArray(cols, rows);
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      next[i][j] = rules[current[i][j]].nextState(
-        countNeighbors(current, i, j, 0)
-      );
+      next[i][j] = rules(countNeighbors(current, i, j, depth), current[i][j]);
     }
   }
   return next;

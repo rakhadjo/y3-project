@@ -12,6 +12,7 @@
     <script type="text/javascript" src="rules.js"></script>
     <script src="../../libraries/p5.js"></script>
     <script type="text/javascript" src="sketch.js"></script>
+    <script type="text/javascript" src="basic.json"></script>
     <style>
       body {
         margin: 0;
@@ -26,11 +27,18 @@
     <button onclick="setPause()">Play/Pause</button>
     <button onclick="setup()">Random</button>
     <button onclick="step()">Single Step</button>
+    <br />
+    <label>Number of States: </label>
     <input type="number" id="states" name="states_input" />
+    <br />
+    <label>Neighbour search depth: </label>
+    <input type="number" id="depth" name="depth_input" />
+    <br />
     <button onclick="setup();">Apply</button>
     <br />
     <br />
     <label id="states_count">Number of States: 2</label> <br />
+    <label id="depth_count">Depth: 1</label> <br />
     <label id="colors_bank">Color List in Hex Here</label>
     <br />
     <label id="gen_count">Generation: 0</label>
