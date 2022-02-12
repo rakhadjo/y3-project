@@ -15,7 +15,28 @@
 
 } */
 
-function parse_rules (json_specs) {
+// from stackoverflow
+String.prototype.format = function () {
+  var args = arguments;
+  return this.replace(/{(\d+)}/g, function (match, number) {
+    return typeof args[number] != "undefined" ? args[number] : match;
+  });
+};
+
+function if_builder(elif, condition, satisfied_rtn, otherwise) {
+  var rtn = "";
+  if (elif) {
+    rtn += "else ";
+  }
+  rtn += "if ( {0} ) { return {1} } return {2} ".format(
+    condition,
+    satisfied_rtn,
+    otherwise
+  );
+  return rtn;
+}
+
+function parse_rules(json_specs) {
   var parsed = JSON.parse(json_specs);
   for (var key in parsed) {
     
