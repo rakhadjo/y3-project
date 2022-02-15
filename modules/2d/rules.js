@@ -25,25 +25,62 @@ String.prototype.format = function () {
 
 function if_builder(condition, satisfied_rtn, otherwise) {
   let rtn = "";
-  rtn += "if ( {0} ) { return {1} } return {2} ".format(condition, satisfied_rtn, otherwise);
+  rtn += "if ( {0} ) { return {1} } return {2} ".format(
+    condition,
+    satisfied_rtn,
+    otherwise
+  );
   return rtn;
+}
+
+/**
+ * 
+ * @param reqs: 
+      {
+      lhs: { type: 'states', states: [ 1 ] },
+      cmp: 'in',
+      rhs: { type: 'values', vals: [ 3, 4 ] },
+      conn: 'AND'
+      } 
+ * @returns String
+ */
+function condition_builder(reqs) {
+  //console.log(reqs)
+  let condition = "";
+  let rng = "";
+  if (reqs.lhs.type == "states" && reqs.rhs.type == "values") {
+    rng += rng
+      ? " + " + "neighs[" + reqs.lhs.states + "]"
+      : "neighs[" + reqs.lhs.states + "]";
+
+    condition = "[" + reqs.rhs.vals + "]" + ".includes(" + rng + ")";
+  }
+
+  return condition;
 }
 
 function create_function(json_rules) {
   let f = "";
   for (var key in json_rules) {
-    let top_if = "if ( {0} == {1} ) { ".format("cur_state", key)
-    f += f ? "else " + top_if : top_if
-    let inner_if = ""
+    let top_if = "if ( {0} == {1} ) { ".format("cur_state", key);
+    f += f ? "else " + top_if : top_if;
+    let inner_if = "";
     for (var req in json_rules[key].nextstate.required) {
-      let comp = "neighs[" + req + "]";
+      /*let comp = "neighs[" + req + "]";
       let accp = "[" + json_rules[key].nextstate.required[req] + "]";
-      let check = accp + ".includes(" + comp + ")";
-      let cond = if_builder(check, json_rules[key].nextstate.satisfied, json_rules[key].nextstate.else);
+      let check = accp + ".includes(" + comp + ")";*/
+      console.log("check: ")
+      console.log(json_rules[key].nextstate.required[req])
+      let check = condition_builder(json_rules[key].nextstate.required[req])
+      let cond = if_builder(
+        check,
+        json_rules[key].nextstate.satisfied,
+        json_rules[key].nextstate.else
+      );
       inner_if += inner_if ? "else " + cond : cond;
-      f += inner_if
+      f += inner_if;
     }
-    f += "} "
+    f += "} ";
     /**
     if (!f) {
       let val = "neighs[ %s ]".format(json_rules[key].nextstate.required);
@@ -53,7 +90,8 @@ function create_function(json_rules) {
 
     }  */
   }
-  return new Function("neighs", "cur_state", f);
+  return f;
+  //return new Function("neighs", "cur_state", f);
 }
 
 const cgol_rules = (neighs, cur_state) => {
@@ -68,7 +106,6 @@ const cgol_rules = (neighs, cur_state) => {
     }
     return 0;
   }
-  
 };
 
 const fire_1 = (neighs, cur_state) => {
