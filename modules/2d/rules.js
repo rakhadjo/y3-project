@@ -23,31 +23,52 @@ String.prototype.format = function () {
   });
 };
 
-function if_builder(elif, condition, satisfied_rtn, otherwise) {
-  var rtn = "";
-  if (elif) {
-    rtn += "else ";
-  }
-  rtn += "if ( {0} ) { return {1} } return {2} ".format(
-    condition,
-    satisfied_rtn,
-    otherwise
-  );
+function if_builder(condition, satisfied_rtn, otherwise) {
+  let rtn = "";
+  rtn += "if ( {0} ) { return {1} } return {2} ".format(condition, satisfied_rtn, otherwise);
   return rtn;
 }
 
-function parse_rules(json_specs) {
-  var parsed = JSON.parse(json_specs);
-  for (var key in parsed) {
-    
+function create_function(json_rules) {
+  let f = "";
+  for (var key in json_rules) {
+    let top_if = "if ( {0} == {1} ) { ".format("cur_state", key)
+    f += f ? "else " + top_if : top_if
+    let inner_if = ""
+    for (var req in json_rules[key].nextstate.required) {
+      let comp = "neighs[" + req + "]";
+      let accp = "[" + json_rules[key].nextstate.required[req] + "]";
+      let check = accp + ".includes(" + comp + ")";
+      let cond = if_builder(check, json_rules[key].nextstate.satisfied, json_rules[key].nextstate.else);
+      inner_if += inner_if ? "else " + cond : cond;
+      f += inner_if
+    }
+    f += "} "
+    /**
+    if (!f) {
+      let val = "neighs[ %s ]".format(json_rules[key].nextstate.required);
+      let condition = "neighs[ %s ]".format();
+      f += if_builder(true, condition)
+    } else {
+
+    }  */
   }
+  return new Function("neighs", "cur_state", f);
 }
 
 const cgol_rules = (neighs, cur_state) => {
-  if (cur_state) {
-    return neighs[1] == 2 || neighs[1] == 3 ? 1 : 0;
+  if (cur_state == 0) {
+    if ([3].includes(neighs[1])) {
+      return 1;
+    }
+    return 0;
+  } else if (cur_state == 1) {
+    if ([2, 3].includes(neighs[1])) {
+      return 1;
+    }
+    return 0;
   }
-  return neighs[1] == 3 ? 1 : 0;
+  
 };
 
 const fire_1 = (neighs, cur_state) => {

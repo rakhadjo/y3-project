@@ -92,7 +92,6 @@ function draw() {
       for (let j = 0; j < rows; j++) {
         let x = i * resolution;
         let y = j * resolution;
-        //console.log("NGENTOT ANJING: " + grid[i][j])
         fill(colors[grid[i][j]]);
         stroke(0);
         rect(x, y, resolution - 1, resolution - 1);
@@ -145,6 +144,7 @@ function mouseClicked() {
 function step() {
   pause = false;
   draw();
+  console.log("")
   pause = true;
 }
 
