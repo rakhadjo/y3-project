@@ -29,7 +29,7 @@ function generateCells(grid, states) {
 function determine_rules(states) {
   switch (states) {
     case 5:
-      return fire_1;
+      return fire_13;
     case 6:
       return fire_1;
     default:

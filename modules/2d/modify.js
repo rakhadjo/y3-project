@@ -11,13 +11,26 @@ let expt = {
           cmp: ">",
           rhs: {
             type: "states",
-            vals: [1, 2],
+            states: [1, 2],
           },
           conn: "AND",
         },
       },
       satisfied: 3,
-      else: 1,
+      else: {
+        lhs: {
+          type: "states",
+          states: [3, 4],
+        },
+        cmp: "<",
+        rhs: {
+          type: "states",
+          states: [1, 2],
+        },
+        conn: "AND",
+      },
+      satisfied_2: 1,
+      else_2: 2
     },
   },
   1: {
@@ -32,7 +45,7 @@ let expt = {
           cmp: ">",
           rhs: {
             type: "states",
-            vals: [1, 2],
+            states: [1, 2],
           },
           conn: "AND",
         },

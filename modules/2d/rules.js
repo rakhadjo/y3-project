@@ -108,6 +108,8 @@ const cgol_rules = (neighs, cur_state) => {
   }
 };
 
+const fire_13 = "";
+
 const fire_1 = (neighs, cur_state) => {
   switch (cur_state) {
     case 0:
