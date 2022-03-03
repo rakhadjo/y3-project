@@ -1,42 +1,57 @@
-let exp = {
+let exp2 = {
   0: {
-    // figure out how to do lhs, comp, and rhs
-    nextstate: {
-      required: {
-        0: {
-          lhs: {
-            type: "states",
-            states: [1],
-          },
-          cmp: "in",
-          rhs: {
-            type: "values",
-            vals: [3],
-          },
-          conn: "AND",
+    next: {
+      conditional_requirements: [
+        {
+          type: "totalling",
+          neighbour_state: 1,
+          total: [3],    
         },
-      },
+      ],
       satisfied: 1,
-      else: 1,
+      else: 0,
     },
   },
   1: {
-    nextstate: {
-      required: {
-        0: {
-          lhs: {
-            type: "states",
-            states: [1],
-          },
-          cmp: "in",
-          rhs: {
-            type: "values",
-            vals: [2, 3],
-          },
+    next: {
+      conditional_requirements: [
+        {
+          type: "totalling",
+          neighbour_state: 1,
+          total: [2, 3],    
         },
-      },
+      ],
       satisfied: 1,
+      else: 0,
+    }
+  }
+};
+
+let exp3_woo = {
+  1: {
+    next: {
+      conditional_requirements: [
+        {
+          type: "totalling",
+          neighbour_state: 0,
+          total: [3],    
+        },
+      ],
+      satisfied: 0,
       else: 1,
     },
   },
+  0: {
+    next: {
+      conditional_requirements: [
+        {
+          type: "totalling",
+          neighbour_state: 0,
+          total: [2, 3],    
+        },
+      ],
+      satisfied: 0,
+      else: 1,
+    }
+  }
 };
