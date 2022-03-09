@@ -1,57 +1,224 @@
-let expt = {
-  0: {
-    // figure out how to do lhs, comp, and rhs
-    nextstate: {
-      required: {
-        1: {
+let expt2 = {
+  default: {
+    next: {
+      conditional_requirements: [
+        {
+          type: "expression",
           lhs: {
-            type: "states",
-            states: [3, 4],
+            neighbour_states: [3, 4],
+            conn: "+",
           },
           cmp: ">",
           rhs: {
-            type: "states",
-            states: [1, 2],
+            neighbour_states: [1, 2],
+            conn: "+",
           },
-          conn: "AND",
         },
+      ],
+      satisfied: 4,
+      else: {
+        conditional_requirements: [
+          {
+            type: "expression",
+            lhs: {
+              neighbour_states: [3, 4],
+              conn: "+",
+            },
+            cmp: "<",
+            rhs: {
+              neighbour_states: [1, 2],
+              conn: "+",
+            },
+          },
+        ],
+        satisfied: 1,
+        else: 2,
       },
+    }
+  },
+  0: {
+    next: {
+      conditional_requirements: [
+        {
+          type: "expression",
+          lhs: {
+            neighbour_states: [3, 4],
+            conn: "+",
+          },
+          cmp: ">",
+          rhs: {
+            neighbour_states: [1, 2],
+            conn: "+",
+          },
+        },
+      ],
       satisfied: 3,
       else: {
-        lhs: {
-          type: "states",
-          states: [3, 4],
-        },
-        cmp: "<",
-        rhs: {
-          type: "states",
-          states: [1, 2],
-        },
-        conn: "AND",
+        conditional_requirements: [
+          {
+            type: "expression",
+            lhs: {
+              neighbour_states: [3, 4],
+              conn: "+",
+            },
+            cmp: "<",
+            rhs: {
+              neighbour_states: [1, 2],
+              conn: "+",
+            },
+          },
+        ],
+        satisfied: 1,
+        else: 2,
       },
-      satisfied_2: 1,
-      else_2: 2
     },
   },
   1: {
-    // figure out how to do lhs, comp, and rhs
-    nextstate: {
-      required: {
-        1: {
+    next: {
+      conditional_requirements: [
+        {
+          type: "expression",
           lhs: {
-            type: "states",
-            states: [3, 4],
+            neighbour_states: [3, 4],
+            conn: "+",
           },
           cmp: ">",
           rhs: {
-            type: "states",
-            states: [1, 2],
+            neighbour_states: [1, 2],
+            conn: "+",
           },
-          conn: "AND",
         },
+      ],
+      satisfied: 0,
+      else: {
+        conditional_requirements: [
+          {
+            type: "expression",
+            lhs: {
+              neighbour_states: [3, 4],
+              conn: "+",
+            },
+            cmp: "<",
+            rhs: {
+              neighbour_states: [1, 2],
+              conn: "+",
+            },
+          },
+        ],
+        satisfied: 2,
+        else: 3,
       },
-      satisfied: 3,
-      else: 1,
+    },
+  },
+  2: {
+    next: {
+      conditional_requirements: [
+        {
+          type: "expression",
+          lhs: {
+            neighbour_states: [3, 4],
+            conn: "+",
+          },
+          cmp: ">",
+          rhs: {
+            neighbour_states: [1, 2],
+            conn: "+",
+          },
+        },
+      ],
+      satisfied: 1,
+      else: {
+        conditional_requirements: [
+          {
+            type: "expression",
+            lhs: {
+              neighbour_states: [3, 4],
+              conn: "+",
+            },
+            cmp: "<",
+            rhs: {
+              neighbour_states: [1, 2],
+              conn: "+",
+            },
+          },
+        ],
+        satisfied: 2,
+        else: 3,
+      },
+    },
+  },
+  3: {
+    next: {
+      conditional_requirements: [
+        {
+          type: "expression",
+          lhs: {
+            neighbour_states: [3, 4],
+            conn: "+",
+          },
+          cmp: ">",
+          rhs: {
+            neighbour_states: [1, 2],
+            conn: "+",
+          },
+        },
+      ],
+      satisfied: 0,
+      else: {
+        conditional_requirements: [
+          {
+            type: "expression",
+            lhs: {
+              neighbour_states: [3, 4],
+              conn: "+",
+            },
+            cmp: "<",
+            rhs: {
+              neighbour_states: [1, 2],
+              conn: "+",
+            },
+          },
+        ],
+        satisfied: 1,
+        else: 2,
+      },
+    },
+  },
+  4: {
+    next: {
+      conditional_requirements: [
+        {
+          type: "expression",
+          lhs: {
+            neighbour_states: [3, 4],
+            conn: "+",
+          },
+          cmp: ">",
+          rhs: {
+            neighbour_states: [1, 2],
+            conn: "+",
+          },
+        },
+      ],
+      satisfied: 4,
+      else: {
+        conditional_requirements: [
+          {
+            type: "expression",
+            lhs: {
+              neighbour_states: [3, 4],
+              conn: "+",
+            },
+            cmp: "<",
+            rhs: {
+              neighbour_states: [1, 2],
+              conn: "+",
+            },
+          },
+        ],
+        satisfied: 1,
+        else: 2,
+      },
     },
   },
 };
