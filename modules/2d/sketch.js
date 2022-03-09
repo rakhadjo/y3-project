@@ -33,8 +33,6 @@ function determine_rules(states) {
     case 6:
       return fire_1;
     default:
-      //2
-      //return create_function(exp2);
       return create_function(exp3_woo)
   }
 }

@@ -24,6 +24,9 @@ let exp2 = {
       satisfied: 1,
       else: 0,
     }
+  }, 
+  default: {
+    satisfied: 0
   }
 };
 

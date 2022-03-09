@@ -23,31 +23,30 @@ function condition_builder(reqs) {
   //console.log(reqs)
   let condition = "";
   let rng = "";
-  if (reqs.type == "totalling") {
-    rng = `neighs[${reqs.neighbour_state}]`;
-    condition = `[${reqs.total}].includes(${rng})`;
-  } else {
-    // (reqs.type == "expression")
-
-    for (let st in reqs.lhs.neighbour_states) {
-      rng += rng
-        ? ` ${reqs.lhs.conn} neighs[${reqs.lhs.neighbour_states[st]}]`
-        : `neighs[${reqs.lhs.neighbour_states[st]}]`;
+  if (reqs.hasOwnProperty("type")) {
+    if (reqs.type == "totalling") {
+      rng = `neighs[${reqs.neighbour_state}]`;
+      condition = `[${reqs.total}].includes(${rng})`;
+    } else {
+      // (reqs.type == "expression")
+      for (let st in reqs.lhs.neighbour_states) {
+        let nxt = `neighs[${reqs.lhs.neighbour_states[st]}]`;
+        rng += rng ? ` + ${nxt}` : `${nxt}`;
+      }
+      rng += ` ${reqs.cmp} `;
+      let _rhs = "";
+      for (let _st in reqs.rhs.neighbour_states) {
+        let _nxt = `neighs[${reqs.rhs.neighbour_states[_st]}]`;
+        _rhs += _rhs ? ` + ${_nxt}` : `${_nxt}`;
+      }
+      condition = rng + _rhs;
     }
-    rng += ` ${reqs.cmp} `;
-    let _rhs = "";
-    for (let _st in reqs.rhs.neighbour_states) {
-      _rhs += _rhs
-        ? ` ${reqs.rhs.conn} neighs[${reqs.rhs.neighbour_states[_st]}]`
-        : `neighs[${reqs.rhs.neighbour_states[_st]}]`;
-    }
-
-    condition = rng + _rhs;
   }
 
   return condition;
 }
 
+// try to implement the moving lizard rules
 function create_function(json_rules) {
   let f = "";
   let dflt = "";
@@ -80,15 +79,14 @@ function create_function(json_rules) {
           json_rules[key].next.else
         );
         inner_if += inner_if ? "else " + cond : cond;
-        f += inner_if;
+        f += inner_if + " }";
       }
     }
 
-    f += "}";
+    //f += "}";
   }
-  console.log("f: " + f);
-  console.log("d: " + dflt);
-  return new Function("neighs", "cur_state", f);
+  console.log("body: " + f + dflt)
+  return new Function("neighs", "cur_state", f + dflt);
 }
 
 // UTILITY FUNCTIONS FOR SKETCHING THE GRAPH
