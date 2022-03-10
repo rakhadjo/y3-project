@@ -1,4 +1,6 @@
 let expt2 = {
+  // addition: add meta information e.g. states numbers and colors 
+  
   default: {
     next: {
       conditional_requirements: [
