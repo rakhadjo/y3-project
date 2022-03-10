@@ -33,7 +33,7 @@ function determine_rules(states) {
     case 6:
       return fire_1;
     default:
-      return create_function(exp3_woo)
+      return create_function(conway_default)
   }
 }
 

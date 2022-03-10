@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Two Dimension Cellular Automata</title>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
     <script
       type="text/javascript"
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
@@ -11,9 +16,17 @@
 
     <script type="text/javascript" src="rules.js"></script>
     <script src="../../libraries/p5.js"></script>
-    <script type="text/javascript" src="conway.js"></script>
+    <!--
+      some predefined rules
+    -->
+    <script type="text/javascript" src="defaults/cgol.js"></script>
     <script type="text/javascript" src="modify.js"></script>
-    <script type="text/javascript" src="util.js"></script>
+    <!--
+      utility modules
+    -->
+    <script type="text/javascript" src="utils/function-builder.js"></script>
+    <script type="text/javascript" src="utils/sketcher.js"></script>
+    <script type="text/javascript" src="utils/html-io.js"></script>
     <script type="text/javascript" src="sketch.js"></script>
     <style>
       body {
