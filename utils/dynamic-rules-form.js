@@ -22,3 +22,30 @@ function renderFormStates(states, formID) {
   }
   formElem.innerHTML = inp;
 }
+
+function getRuleInput(type, i, states) {
+  let rtn = "";
+  if (type == "totalling") {
+    rtn += "<br/ ><label>select neighbour's state to measure</label><br/ >";
+    // render existing types of neighbor states to determine
+    for (let j = 0; j < states; j++) {
+        let _txt = `
+        <input value="${j}" type="radio" name="${j}_neigh"> 
+        <label for=${j}_neigh>${j}</label>`
+        rtn += _txt;
+    }
+    // text box to query how many there should be
+    rtn += `
+    <label for=${i}_>how many?</label>
+    <input type="text" id="${i}_">`
+  }
+  return rtn;
+}
+
+function handleTypeChange(src, i) {
+  //save all values
+  //render the list again based on the saved file
+  if (src.value == "totalling") {
+  }
+  return "";
+}
