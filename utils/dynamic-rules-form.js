@@ -38,6 +38,8 @@ function getRuleInput(type, i, states) {
     rtn += `
     <label for=${i}_>how many?</label>
     <input type="text" id="${i}_">`
+  } else { // type == "expression"
+    
   }
   return rtn;
 }
@@ -45,7 +47,4 @@ function getRuleInput(type, i, states) {
 function handleTypeChange(src, i) {
   //save all values
   //render the list again based on the saved file
-  if (src.value == "totalling") {
-  }
-  return "";
 }
