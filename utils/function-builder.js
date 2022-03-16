@@ -5,6 +5,10 @@ String.prototype.format = function () {
   });
 };
 
+function probability(n) {
+  return !!n && Math.random() <= n;
+}
+
 function if_builder(condition, satisfied_rtn, otherwise) {
   let rtn = "";
   if (typeof otherwise == "number") {
@@ -25,8 +29,7 @@ function condition_builder(reqs) {
     if (reqs.type == "totalling") {
       rng = `neighs[${reqs.neighbour_state}]`;
       condition = `[${reqs.total}].includes(${rng})`;
-    } else {
-      // (reqs.type == "expression")
+    } else if (reqs.type == "expression") {
       for (let st in reqs.lhs.neighbour_states) {
         let nxt = `neighs[${reqs.lhs.neighbour_states[st]}]`;
         rng += rng ? ` + ${nxt}` : `${nxt}`;
@@ -39,6 +42,10 @@ function condition_builder(reqs) {
       }
       condition = rng + _rhs;
     }
+     else {
+       // (reqs.type == "probability")
+       condition = `probability(${reqs.p})`
+     }
   }
 
   return condition;
