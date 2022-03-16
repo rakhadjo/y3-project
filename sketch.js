@@ -28,6 +28,8 @@ function generateCells(grid, states) {
 
 function determine_rules(states) {
   switch (states) {
+    case 3: 
+      return create_function(firesim)
     case 5:
       return create_function(expt2);
     case 6:
@@ -40,7 +42,7 @@ function determine_rules(states) {
 function setup(k = 2) {
   // get the number of states
   generationCount = 0;
-  let states = parseInt(document.getElementById("states").value) || 2;
+  let states = parseInt(document.getElementById("states").value) || 3;
   depth = parseInt(document.getElementById("depth").value) || 0;
   announceStates(states);
   announceDepth(depth);
