@@ -9,8 +9,8 @@
 
 /**
  * 0: burnt or unable to burn
- * 1: burning down
- * 2: burnable
+ * 1: burnable
+ * 2: burning down
  */
 
 let firesim = {
@@ -26,12 +26,12 @@ let firesim = {
       else: 0,
     },
   },
-  2: {
+  1: {
     next: {
       conditional_requirements: [
         {
           type: "totalling",
-          neighbour_state: 1,
+          neighbour_state: 2,
           total: [1, 2, 3, 4, 5, 6, 7, 8],
         },
         {
@@ -39,8 +39,8 @@ let firesim = {
           p: 0.8,
         },
       ],
-      satisfied: 1,
-      else: 2,
+      satisfied: 2,
+      else: 1,
     },
   },
 };
