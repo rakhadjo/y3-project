@@ -26,35 +26,44 @@ function generateCells(grid, states) {
   }
 }
 
+function generateFireCells(grid) {
+  generateCells(grid, 2);
+  grid[floor(random(cols))][floor(random(rows))] = 2;
+}
+
 function determine_rules(states) {
   switch (states) {
-    case 3: 
-      return create_function(firesim)
+    case 3:
+      return create_function(firesim);
     case 5:
       return create_function(expt2);
     case 6:
       return fire_1;
     default:
-      return create_function(conway_default)
+      return create_function(conway_default);
   }
 }
 
 function setup(k = 2) {
   // get the number of states
   generationCount = 0;
-  let states = parseInt(document.getElementById("states").value) || 3;
+  let states = parseInt(document.getElementById("states").value) || 2;
   depth = parseInt(document.getElementById("depth").value) || 0;
   announceStates(states);
   announceDepth(depth);
   active_rules = determine_rules(states);
   colors = colorBank(states);
-  cnv = createCanvas(windowWidth / 2, 600);
+  cnv = createCanvas(windowWidth / 2, 700);
   centerCanvas();
   background(0);
   cols = floor(width / resolution);
   rows = floor(height / resolution);
   grid = make2DArray(cols, rows);
-  generateCells(grid, states);
+  if (states == 3) {
+    generateFireCells(grid);
+  } else {
+    generateCells(grid, states);
+  }
   step();
 }
 
