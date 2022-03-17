@@ -5,7 +5,8 @@ function colorBank(states) {
     return [0, 255];
   } else if (states == 3) {
     announceColors("Forest Fire Mode");
-    return [[0, 0, 0], [255, 0, 0], [32, 168, 5]];
+    // 0: burnt, 1: burnable, 2: burning
+    return [[0, 0, 0], [32, 168, 5], [255, 0, 0]];
   }
   let bank = [];
   for (let i = 0; i < states; i++) {
