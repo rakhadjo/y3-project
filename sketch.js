@@ -51,9 +51,10 @@ function setup(k = 2) {
   depth = parseInt(document.getElementById("depth").value) || 0;
   announceStates(states);
   announceDepth(depth);
-  active_rules = determine_rules(states);
   colors = colorBank(states);
-  cnv = createCanvas(windowWidth / 2, 700);
+  renderFormStates(states, "rulesform")
+  active_rules = determine_rules(states);
+  cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
   background(0);
   cols = floor(width / resolution);
