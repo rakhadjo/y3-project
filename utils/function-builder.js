@@ -38,11 +38,14 @@ function condition_builder(requirements) {
           _rhs += _rhs ? ` + ${_nxt}` : `${_nxt}`;
         }
         inner_cond = rng + _rhs;
-      } else {
-        // (reqs.type == "probability")
+      } else if (reqs.type == "probability") {
         inner_cond = `probability(${requirements[reqs].p})`;
+      } else {
+        // (reqs.type == "total-p")
+        rng = `neighs[${requirements[reqs].neighbour_state}]`;
+        inner_cond = `probability(${requirements[reqs].p}) && [${requirements[reqs].total}].includes(${rng})`
       }
-      condition += condition ? "&& " + inner_cond : inner_cond;
+      condition += condition ? "|| " + inner_cond : inner_cond;
     }
   }
 

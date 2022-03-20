@@ -30,12 +30,15 @@ let firesim = {
     next: {
       conditional_requirements: [
         {
-          type: "totalling",
+          typo: "total-p",
           neighbour_state: 2,
-          total: [1, 2, 3, 4, 5, 6, 7, 8],
+          total: [1, 2, 3, 4],
+          p: 0.4,
         },
         {
-          type: "probability",
+          type: "total-p",
+          neighbour_state: 2,
+          total: [5, 6, 7, 8],
           p: 0.8,
         },
       ],
