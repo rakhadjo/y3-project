@@ -3,6 +3,10 @@ function colorBank(states) {
   if (states == 2) {
     announceColors("Default Black & White");
     return [0, 255];
+  } else if (states == 3) {
+    announceColors("Forest Fire Mode");
+    // 0: burnt, 1: burnable, 2: burning
+    return [[0, 0, 0], [32, 168, 5], [255, 0, 0]];
   }
   let bank = [];
   for (let i = 0; i < states; i++) {
