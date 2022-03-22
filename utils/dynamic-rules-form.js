@@ -13,7 +13,9 @@ function renderFormStatesFromActiveRules(json_rules, formID) {
   let formInput = `
   <br />
   <label for="rules_textarea">Rules:</label> <br />
-  <textarea id="rules_textarea" name="rules_textarea" rows="4" cols="50">
+  <textarea id="rules_textarea" name="rules_textarea" rows="${
+    json_rules.split(/\r\n|\r|\n/).length
+  }" cols="80">
     ${json_rules}
   </textarea>
     <br><br>
