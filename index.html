@@ -4,11 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Two Dimension Cellular Automata</title>
+
     <!-- Latest compiled and minified CSS -->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="index.css" />
     <script
       type="text/javascript"
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
@@ -20,14 +22,21 @@
       some predefined rules
     -->
     <script type="text/javascript" src="defaults/cgol.js"></script>
+    <script type="text/javascript" src="defaults/firesim.js"></script>
     <script type="text/javascript" src="modify.js"></script>
     <!--
       utility modules
     -->
+    <script type="text/javascript" src="utils/dynamic-rules-form.js"></script>
     <script type="text/javascript" src="utils/function-builder.js"></script>
     <script type="text/javascript" src="utils/sketcher.js"></script>
     <script type="text/javascript" src="utils/html-io.js"></script>
     <script type="text/javascript" src="sketch.js"></script>
+
+    <script>
+      window.addEventListener("resize", setup);
+    </script>
+
     <style>
       body {
         margin: 0;
@@ -39,23 +48,24 @@
     </style>
   </head>
   <body>
-    <button onclick="setPause()">Play/Pause</button>
-    <button onclick="setup()">Random</button>
-    <button onclick="step()">Single Step</button>
+    <div class="center-h">
+      <button onclick="setPause()">Play/Pause</button>
+      <button onclick="setup()">Random</button>
+      <button onclick="step()">Single Step</button>
+      <button onclick="setFire()">Firesim</button>
+    </div>
+    <h4 id="states_count">Number of States: 2</h4>
+    <h4 id="depth_count">Depth: 1</h4>
+    <h4 id="colors_bank">Color List in Hex Here</h4>
+    <h4 id="gen_count">Generation: 0</h4>
+    <h2>Determine your Rules Here!</h2>
+    <label for="states">Number of States: </label>
+    <input type="number" id="states" name="states_input" /> 
+    <button onclick="setup();">Apply Number of States</button> <br />
     <br />
-    <label>Number of States: </label>
-    <input type="number" id="states" name="states_input" />
-    <br />
-    <label>Neighbour search depth: </label>
-    <input type="number" id="depth" name="depth_input" />
-    <br />
-    <button onclick="setup();">Apply</button>
-    <br />
-    <br />
-    <label id="states_count">Number of States: 2</label> <br />
-    <label id="depth_count">Depth: 1</label> <br />
-    <label id="colors_bank">Color List in Hex Here</label>
-    <br />
-    <label id="gen_count">Generation: 0</label>
+    <label for="depth">Neighbour search depth: </label>
+    <input type="number" id="depth" name="depth_input" /><br /> <br />
+    <button onclick="showHelp()">Help with Rules</button>
+    <div id="rulesform"></div>
   </body>
 </html>
