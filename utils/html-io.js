@@ -40,28 +40,3 @@ function centerCanvas() {
 function windowResized() {
   centerCanvas();
 }
-
-// RULE DEFINER FUNCTIONS
-
-function parseCustomRules() {
-  let contents = document.getElementById("rules_textarea").value;
-  if (obeysJsonSchema(contents)) {
-    custom_rules = create_function(JSON.parse(contents));
-    custom_rules_mode = true
-    setup(null, false)
-    alert("your rules are now live!")
-    document.getElementById("rules_textarea").value = contents
-  } else {
-    alert("pls apply rules properly")
-  }
-}
-
-function obeysJsonSchema(json_rules) {
-  // apply through schema here, for now just return T
-  return true;
-  
-}
-
-function showHelp() {
-  window.location.replace("/help.html");
-}
