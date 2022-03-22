@@ -1,5 +1,6 @@
 let pause = true;
 let grid;
+let temp_grid;
 let cols;
 let rows;
 let cnv; // THIS IS THE CANVAS!!
@@ -27,6 +28,7 @@ function generateCells(grid, states) {
       grid[i][j] = floor(random(states));
     }
   }
+  temp_grid = grid;
 }
 
 function generateFireCells(grid) {
@@ -60,7 +62,7 @@ function determine_rules(states) {
   }
 }
 
-function setup(k = 2) {
+function setup(k = 2, newGrid = true) {
   // get the number of states
   generationCount = 0;
   let states = parseInt(document.getElementById("states").value) || 2;
@@ -69,7 +71,10 @@ function setup(k = 2) {
   announceDepth(depth);
   colors = colorBank(states);
   //renderFormStates(states, "rulesform")
-  renderFormStatesFromActiveRules(JSON.stringify(switch_rules(states), null, '\t'), "rulesform");
+  renderFormStatesFromActiveRules(
+    JSON.stringify(switch_rules(states), null, "\t"),
+    "rulesform"
+  );
   active_rules = custom_rules_mode ? custom_rules : determine_rules(states);
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
@@ -80,7 +85,11 @@ function setup(k = 2) {
   if (states == 3) {
     generateFireCells(grid);
   } else {
-    generateCells(grid, states);
+    if (newGrid) {
+      generateCells(grid, states);
+    } else {
+      grid = temp_grid;
+    }
   }
   step();
 }
