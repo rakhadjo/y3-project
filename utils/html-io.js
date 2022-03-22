@@ -4,12 +4,16 @@ function setPause() {
 
 function setFire() {
   // set 3 states
-  states = 3
+  states = 3;
   // set fire colors
   announceColors("Forest Fire Mode");
-  colors = [[0, 0, 0], [255, 0, 0], [32, 168, 5]];
+  colors = [
+    [0, 0, 0],
+    [255, 0, 0],
+    [32, 168, 5],
+  ];
   // determine rules
-  active_rules = create_function(firesim)
+  active_rules = create_function(firesim);
 }
 
 function announceColors(colors) {
@@ -30,9 +34,13 @@ function announceDepth(depth) {
 function centerCanvas() {
   var x = (windowWidth - width) / 2;
   var y = (windowHeight - height) / 2;
-  cnv.position(x, y);
+  cnv.position(x + (0.23 * windowWidth), y);
 }
 
 function windowResized() {
   centerCanvas();
+}
+
+function showHelp() {
+  window.location.replace("/help.html");
 }

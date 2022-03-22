@@ -31,6 +31,19 @@ function generateFireCells(grid) {
   grid[floor(random(cols))][floor(random(rows))] = 2;
 }
 
+function switch_rules(states) {
+  switch (states) {
+    case 3:
+      return firesim;
+    case 5:
+      return expt2;
+    case 6:
+      return fire_1;
+    default:
+      return conway_default;
+  }
+}
+
 function determine_rules(states) {
   switch (states) {
     case 3:
@@ -52,8 +65,9 @@ function setup(k = 2) {
   announceStates(states);
   announceDepth(depth);
   colors = colorBank(states);
-  renderFormStates(states, "rulesform")
+  //renderFormStates(states, "rulesform")
   active_rules = determine_rules(states);
+  renderFormStatesFromActiveRules(JSON.stringify(switch_rules(states), null, '\t'), "rulesform");
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
   background(0);
