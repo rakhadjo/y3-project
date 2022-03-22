@@ -32,6 +32,12 @@
     <script type="text/javascript" src="utils/sketcher.js"></script>
     <script type="text/javascript" src="utils/html-io.js"></script>
     <script type="text/javascript" src="sketch.js"></script>
+
+    <script>
+      window.addEventListener("resize", setup);
+      centerCanvas();
+    </script>
+
     <style>
       body {
         margin: 0;
@@ -55,12 +61,12 @@
     <h4 id="gen_count">Generation: 0</h4>
     <h2>Determine your Rules Here!</h2>
     <label for="states">Number of States: </label>
-    <input type="number" id="states" name="states_input" /> <br /> <br />
-    <button onclick="setup();">Apply Number of States</button> <br /> <br />
+    <input type="number" id="states" name="states_input" /> <br />
+    <br />
+    <button onclick="setup();">Apply Number of States</button> <br />
+    <br />
     <label for="depth">Neighbour search depth: </label>
     <input type="number" id="depth" name="depth_input" /><br />
-    <form id="rulesform">
-      
-    </form>
+    <form id="rulesform"></form>
   </body>
 </html>
