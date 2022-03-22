@@ -42,5 +42,5 @@ function windowResized() {
 }
 
 function showHelp() {
-  window.location.replace("/help.html");
+  window.open('/help.html', '_blank');
 }
