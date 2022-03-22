@@ -46,7 +46,11 @@ function windowResized() {
 function parseCustomRules() {
   let contents = document.getElementById("rules_textarea").value;
   if (obeysJsonSchema(contents)) {
+    custom_rules = create_function(JSON.parse(contents));
+    custom_rules_mode = true
+    setup()
     alert("your rules are now live!")
+
   } else {
     alert("pls apply rules properly")
   }
