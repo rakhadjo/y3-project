@@ -48,9 +48,9 @@ function parseCustomRules() {
   if (obeysJsonSchema(contents)) {
     custom_rules = create_function(JSON.parse(contents));
     custom_rules_mode = true
-    setup()
+    setup(null, false)
     alert("your rules are now live!")
-
+    document.getElementById("rules_textarea").value = contents
   } else {
     alert("pls apply rules properly")
   }
