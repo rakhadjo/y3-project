@@ -67,7 +67,7 @@ function setup(k = 2) {
   colors = colorBank(states);
   //renderFormStates(states, "rulesform")
   active_rules = determine_rules(states);
-  renderFormStatesFromActiveRules(JSON.stringify(switch_rules(states)), "rulesform");
+  renderFormStatesFromActiveRules(JSON.stringify(switch_rules(states), null, '\t'), "rulesform");
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
   background(0);
