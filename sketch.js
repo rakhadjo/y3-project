@@ -7,6 +7,9 @@ let colors;
 let resolution = 10;
 let generationCount = 0;
 
+let custom_rules_mode = false;
+let custom_rules;
+
 let active_rules; // rules to be applied
 let depth; // how far you should look outwards
 
@@ -66,8 +69,8 @@ function setup(k = 2) {
   announceDepth(depth);
   colors = colorBank(states);
   //renderFormStates(states, "rulesform")
-  active_rules = determine_rules(states);
   renderFormStatesFromActiveRules(JSON.stringify(switch_rules(states), null, '\t'), "rulesform");
+  active_rules = custom_rules_mode ? custom_rules : determine_rules(states);
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
   background(0);
