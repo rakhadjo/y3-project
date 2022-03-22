@@ -17,7 +17,7 @@ function renderFormStatesFromActiveRules(json_rules, formID) {
     ${json_rules}
   </textarea>
   <br><br>
-  <input type="submit" value="Apply Rules">`;
+  <button onclick="parseCustomRules()">Apply Custom Rules!</button>`;
   formElemt.innerHTML = formInput;
 }
 
