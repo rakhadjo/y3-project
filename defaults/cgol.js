@@ -1,4 +1,5 @@
 let conway_default = {
+  $_meta: {},
   0: {
     next: {
       conditional_requirements: [
