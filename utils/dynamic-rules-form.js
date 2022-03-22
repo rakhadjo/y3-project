@@ -8,6 +8,19 @@ function renderFormStates(states, formID, type = "totalling") {
   formElem.innerHTML = inp;
 }
 
+function renderFormStatesFromActiveRules(json_rules, formID) {
+  let formElemt = document.getElementById(formID);
+  let formInput = `
+  <br />
+  <label for="rules_textarea">Rules:</label> <br />
+  <textarea id="rules_textarea" name="rules_textarea" rows="4" cols="50">
+    ${json_rules}
+  </textarea>
+    <br><br>
+    <input type="submit" value="Apply Rules">`;
+  formElemt.innerHTML = formInput;
+}
+
 function generateIndividualClauses(i, type, states) {
   console.log(`${colors[i]}`);
   let nxt = `<label style="color: rgb(${colors[i]})"> state ${i}</label>`;
@@ -49,7 +62,6 @@ function getRuleInput(type, i, states) {
 function handleTypeChange(src, i) {
   //save all values
   //render the list again based on the saved file
-  console.log("id: " + i)
+  console.log("id: " + i);
   console.log("value: " + src.value);
-  
 }
