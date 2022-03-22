@@ -10,6 +10,7 @@ let generationCount = 0;
 
 let custom_rules_mode = false;
 let custom_rules;
+let textarea_val;
 
 let active_rules; // rules to be applied
 let depth; // how far you should look outwards
@@ -62,7 +63,7 @@ function determine_rules(states) {
   }
 }
 
-function setup(k = 2, newGrid = true) {
+function setup(k = 2, newGrid = true, randomBtn = false) {
   // get the number of states
   generationCount = 0;
   let states = parseInt(document.getElementById("states").value) || 2;
@@ -71,9 +72,13 @@ function setup(k = 2, newGrid = true) {
   announceDepth(depth);
   colors = colorBank(states);
   //renderFormStates(states, "rulesform")
+  textarea_val = !textarea_val
+    ? JSON.stringify(switch_rules(states), null, "\t")
+    : textarea_val;
   renderFormStatesFromActiveRules(
     JSON.stringify(switch_rules(states), null, "\t"),
-    "rulesform"
+    "rulesform",
+    randomBtn
   );
   active_rules = custom_rules_mode ? custom_rules : determine_rules(states);
   cnv = createCanvas(windowWidth / 2, 600);
