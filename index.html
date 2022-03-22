@@ -35,7 +35,6 @@
 
     <script>
       window.addEventListener("resize", setup);
-      centerCanvas();
     </script>
 
     <style>
@@ -61,12 +60,12 @@
     <h4 id="gen_count">Generation: 0</h4>
     <h2>Determine your Rules Here!</h2>
     <label for="states">Number of States: </label>
-    <input type="number" id="states" name="states_input" /> <br />
-    <br />
+    <input type="number" id="states" name="states_input" /> 
     <button onclick="setup();">Apply Number of States</button> <br />
     <br />
     <label for="depth">Neighbour search depth: </label>
-    <input type="number" id="depth" name="depth_input" /><br />
+    <input type="number" id="depth" name="depth_input" /><br /> <br />
+    <button onclick="showHelp()">Help with Rules</button>
     <form id="rulesform"></form>
   </body>
 </html>
