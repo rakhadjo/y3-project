@@ -33,6 +33,7 @@ function parseCustomRules() {
     document.getElementById("rules_textarea").value = contents;
   } else {
     alert("pls apply rules properly");
+    console.log(tv4.error);
   }
 }
 
@@ -40,8 +41,12 @@ import("../libraries/tv4");
 
 // only one schema is there, so will only input rules
 function obeysJsonSchema(json_rules) {
-  console.log("all your base are belong to us");
-  return tv4.validate({}, {});
+  try {
+    let k = JSON.parse(json_rules);
+    return tv4.validate(k, schema); // nice implementation, now i just gotta implement the schema
+  } catch (err) {
+    return false;
+  }
 }
 
 function showHelp() {
