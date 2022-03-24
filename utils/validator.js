@@ -1,4 +1,6 @@
+let ajv = require("ajv");
+
+// only one schema is there, so will only input rules
 function obeysJsonSchema(json_rules) {
-    // apply through schema here, for now just return T
-    return true;
-  }
+  return true;
+}
