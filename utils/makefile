@@ -1,2 +1,2 @@
-client-validator:
-	browserify validator.js > client.validator.js
+form-and-validator:
+	browserify dynamic-rules-form.js > client.main.js

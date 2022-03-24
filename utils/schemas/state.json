@@ -1,0 +1,11 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "name": "state",
+    "type": "object",
+    "properties": {
+        "next": {
+            "type": "object",
+            "items": []
+        }
+    }
+}
