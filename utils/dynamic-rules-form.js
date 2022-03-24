@@ -24,7 +24,7 @@ function renderFormStatesFromActiveRules(json_rules, formID, randomButton) {
 
 function parseCustomRules() {
   let contents = document.getElementById("rules_textarea").value;
-  textarea_val = contents
+  textarea_val = contents;
   if (obeysJsonSchema(contents)) {
     custom_rules = create_function(JSON.parse(contents));
     custom_rules_mode = true;
@@ -36,15 +36,13 @@ function parseCustomRules() {
   }
 }
 
-let ajv = require("ajv");
+import("../libraries/tv4");
 
 // only one schema is there, so will only input rules
 function obeysJsonSchema(json_rules) {
-
-  return true;
-  
+  console.log("all your base are belong to us");
+  return tv4.validate({}, {});
 }
-
 
 function showHelp() {
   window.location.replace("/help.html");
