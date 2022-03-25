@@ -63,7 +63,12 @@ function determine_rules(states) {
   }
 }
 
-function setup(k = 2, newGrid = true, randomBtn = false) {
+function setup(
+  k = 2,
+  newGrid = true,
+  randomBtn = false,
+  updateStateNum = false
+) {
   // get the number of states
   generationCount = 0;
   let states = parseInt(document.getElementById("states").value) || 2;
@@ -71,13 +76,11 @@ function setup(k = 2, newGrid = true, randomBtn = false) {
   announceStates(states);
   announceDepth(depth);
   colors = colorBank(states);
-  //renderFormStates(states, "rulesform")
   textarea_val = !textarea_val
     ? JSON.stringify(switch_rules(states), null, "\t")
     : textarea_val;
   renderFormStatesFromActiveRules(
     JSON.stringify(switch_rules(states), null, "\t"),
-    "rulesform",
     randomBtn
   );
   active_rules = custom_rules_mode ? custom_rules : determine_rules(states);
