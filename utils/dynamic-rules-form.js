@@ -1,15 +1,4 @@
-function renderFormStates(states, formID, type = "totalling") {
-  let formElem = document.getElementById(formID);
-  let inp = "";
-  formElem.innerHTML = inp;
-  for (let i = 0; i < states; i++) {
-    inp += generateIndividualClauses(i, type, states);
-  }
-  formElem.innerHTML = inp;
-}
-
-function renderFormStatesFromActiveRules(json_rules, formID, randomButton) {
-  let formElemt = document.getElementById(formID);
+function renderFormStatesFromActiveRules(json_rules, randomButton) {
   let content = randomButton ? textarea_val : json_rules;
   let formInput = `
   <br />
@@ -19,7 +8,17 @@ function renderFormStatesFromActiveRules(json_rules, formID, randomButton) {
   </textarea>
   <br><br>
   <button onclick="parseCustomRules()">Apply Custom Rules!</button>`;
-  formElemt.innerHTML = formInput;
+  document.getElementById("rulesform").innerHTML = formInput;
+}
+
+function onPresetRadioChange(src) {
+  let x;
+  if (src.value == "firesim") {
+    x = JSON.stringify(firesim, null, "\t")
+  } else {
+    x = JSON.stringify(conway_default, null, "\t")
+  }
+  renderFormStatesFromActiveRules(x, false);
 }
 
 function parseCustomRules() {
@@ -40,6 +39,7 @@ function parseCustomRules() {
 import("../libraries/tv4");
 
 // only one schema is there, so will only input rules
+// return some feed back on rules validation if bad
 function obeysJsonSchema(json_rules) {
   try {
     let k = JSON.parse(json_rules);
