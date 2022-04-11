@@ -31,8 +31,7 @@ function parseCustomRules() {
     alert("your rules are now live!");
     document.getElementById("rules_textarea").value = contents;
   } else {
-    alert("pls apply rules properly");
-    console.log(tv4.error);
+    custom_rules = conway_default;
   }
 }
 
