@@ -54,9 +54,11 @@ function default_builder(def) {
 function create_function(json_rules) {
   let f = "";
   let dflt = "";
+  let temp_default;
   for (var key in json_rules) {
     if (key == "default") {
       let stmt = default_builder(json_rules.default.next);
+      temp_default = stmt;
       dflt += dflt ? "" : `else { ${stmt} }`;
     } else if (key != "$_meta") {
       // not the `default` value but describes state
@@ -79,5 +81,8 @@ function create_function(json_rules) {
     //f += "}";
   }
   console.log("body: " + f + dflt);
+  if (f == "") {
+    return new Function("neighs", "cur_state", temp_default);
+  }
   return new Function("neighs", "cur_state", f + dflt);
 }
