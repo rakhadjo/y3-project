@@ -13,6 +13,7 @@ let custom_rules;
 let textarea_val;
 
 let active_rules; // rules to be applied
+let rules_str;
 let depth; // how far you should look outwards
 
 function make2DArray(cols, rows) {

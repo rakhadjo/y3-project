@@ -13,6 +13,7 @@ let schema = {
   $defs: {
     state: {
       type: "object",
+      additionalProperties: false,
       properties: {
         next: {
           type: "object",
@@ -21,8 +22,8 @@ let schema = {
             satisfied: { type: "integer" },
             else: { type: "integer" },
           },
+          required: ["conditional_requirements", "satisfied", "else"],
         },
-        additionalProperties: false,
       },
     },
     reqs_list: {
@@ -30,6 +31,7 @@ let schema = {
       items: [{ $ref: "#/$defs/reqs" }],
     },
     reqs: {
+      additionalProperties: false,
       type: "object",
       properties: {
         type: {
