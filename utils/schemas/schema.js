@@ -33,7 +33,7 @@ let schema = {
       type: "object",
       properties: {
         type: {
-          enum: ["totalling", "total-p", "expression"],
+          enum: ["totalling", "total-p", "expression", "probability"],
         },
         neighbour_state: {
           type: "integer",
@@ -129,8 +129,24 @@ let schema = {
             },
           },
         },
+        {
+          if: {
+            properties: {
+              type: {
+                const: "probability",
+              },
+            },
+            required: ["type"],
+          },
+          then: {
+            required: ["p"],
+            properties: {
+              p: { type: "integer" },
+            },
+          },
+        },
       ],
     },
   },
-  required: ["$_meta"],
-};
+}
+;
