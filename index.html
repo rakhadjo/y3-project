@@ -25,18 +25,18 @@
     <script type="text/javascript" src="defaults/firesim.js"></script>
     <script type="text/javascript" src="modify.js"></script>
     <!--
+      schemas data
+    -->
+    <script type="text/javascript" src="utils/schemas/schema.js"></script>
+    <!--
       utility modules
     -->
     <script type="text/javascript" src="utils/dynamic-rules-form.js"></script>
     <script type="text/javascript" src="utils/function-builder.js"></script>
     <script type="text/javascript" src="utils/html-io.js"></script>
     <script type="text/javascript" src="utils/sketcher.js"></script>
-    <script type="text/javascript" src="utils/client.validator.js"></script>
+    <script type="text/javascript" src="utils/validator.js"></script>
     <script type="text/javascript" src="sketch.js"></script>
-    <!--
-      schemas data
-    -->
-    <script type="text/javascript" src="utils/schemas/schema.js"></script>
     <script>
       window.addEventListener("resize", setup);
     </script>
@@ -65,7 +65,10 @@
     <h2>Determine your Rules Here!</h2>
     <label for="states">Number of States: </label>
     <input type="number" id="states" name="states_input" />
-    <button onclick="setup(null, null, null, true);">Apply Number of States</button> <br />
+    <button onclick="setup(null, true, true, true);">
+      Apply Number of States
+    </button>
+    <br />
     <br />
     <label for="depth">Neighbour search depth: </label>
     <input type="number" id="depth" name="depth_input" /><br />
