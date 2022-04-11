@@ -31,7 +31,7 @@ let schema = {
       items: [{ $ref: "#/$defs/reqs" }],
     },
     reqs: {
-      additionalProperties: false,
+      additionalProperties: true,
       type: "object",
       properties: {
         type: {
@@ -83,7 +83,7 @@ let schema = {
             required: ["neighbour_state", "p", "total"],
             properties: {
               neighbour_state: { type: "integer" },
-              p: { type: "integer" },
+              p: { type: "number" },
               total: {
                 type: "array",
                 items: [
@@ -143,7 +143,7 @@ let schema = {
           then: {
             required: ["p"],
             properties: {
-              p: { type: "integer" },
+              p: { type: "number" },
             },
           },
         },
