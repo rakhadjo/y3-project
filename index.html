@@ -15,9 +15,9 @@
       type="text/javascript"
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
     ></script>
-
     <script type="text/javascript" src="rules.js"></script>
     <script src="../../libraries/p5.js"></script>
+    <script src="../../libraries/tv4.js"></script>
     <!--
       some predefined rules
     -->
@@ -25,14 +25,18 @@
     <script type="text/javascript" src="defaults/firesim.js"></script>
     <script type="text/javascript" src="modify.js"></script>
     <!--
+      schemas data
+    -->
+    <script type="text/javascript" src="utils/schemas/schema.js"></script>
+    <!--
       utility modules
     -->
     <script type="text/javascript" src="utils/dynamic-rules-form.js"></script>
     <script type="text/javascript" src="utils/function-builder.js"></script>
-    <script type="text/javascript" src="utils/sketcher.js"></script>
     <script type="text/javascript" src="utils/html-io.js"></script>
+    <script type="text/javascript" src="utils/sketcher.js"></script>
+    <script type="text/javascript" src="utils/validator.js"></script>
     <script type="text/javascript" src="sketch.js"></script>
-
     <script>
       window.addEventListener("resize", setup);
     </script>
@@ -50,7 +54,7 @@
   <body>
     <div class="center-h">
       <button onclick="setPause()">Play/Pause</button>
-      <button onclick="setup()">Random</button>
+      <button onclick="setup(null, true, true)">Random</button>
       <button onclick="step()">Single Step</button>
       <button onclick="setFire()">Firesim</button>
     </div>
@@ -60,12 +64,34 @@
     <h4 id="gen_count">Generation: 0</h4>
     <h2>Determine your Rules Here!</h2>
     <label for="states">Number of States: </label>
-    <input type="number" id="states" name="states_input" /> 
-    <button onclick="setup();">Apply Number of States</button> <br />
+    <input type="number" id="states" name="states_input" />
+    <button onclick="setup(null, true, true, true);">
+      Apply Number of States
+    </button>
+    <br />
     <br />
     <label for="depth">Neighbour search depth: </label>
-    <input type="number" id="depth" name="depth_input" /><br /> <br />
+    <input type="number" id="depth" name="depth_input" /><br />
+    <br />
     <button onclick="showHelp()">Help with Rules</button>
-    <form id="rulesform"></form>
+    <br />
+    <input
+      type="radio"
+      checked
+      id="r_preset_1"
+      value="cgol"
+      name="r_preset"
+      onchange="onPresetRadioChange(this)"
+    />
+    <label for="r_preset_1">Default CGOL (2 states)</label><br />
+    <input
+      type="radio"
+      id="r_preset_2"
+      value="firesim"
+      name="r_preset"
+      onchange="onPresetRadioChange(this)"
+    />
+    <label for="r_preset_1">Fire Sim (3 states)</label><br />
+    <div id="rulesform"></div>
   </body>
 </html>

@@ -40,7 +40,3 @@ function centerCanvas() {
 function windowResized() {
   centerCanvas();
 }
-
-function showHelp() {
-  window.location.replace("/help.html");
-}

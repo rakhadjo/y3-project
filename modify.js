@@ -1,6 +1,6 @@
 let expt2 = {
-  // addition: add meta information e.g. states numbers and colors 
   
+  $_meta: {},
   default: {
     next: {
       conditional_requirements: [

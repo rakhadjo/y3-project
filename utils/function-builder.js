@@ -1,10 +1,3 @@
-String.prototype.format = function () {
-  var args = arguments;
-  return this.replace(/{(\d+)}/g, function (match, number) {
-    return typeof args[number] != "undefined" ? args[number] : match;
-  });
-};
-
 function probability(n) {
   return !!n && Math.random() <= n;
 }
@@ -65,8 +58,8 @@ function create_function(json_rules) {
     if (key == "default") {
       let stmt = default_builder(json_rules.default.next);
       dflt += dflt ? "" : `else { ${stmt} }`;
-    } else {
-      // not the `default` value
+    } else if (key != "$_meta") {
+      // not the `default` value but describes state
       //console.log(`checking: ${json_rules[key].next}`);
       let top_if = `if (cur_state == ${key}) {`;
       f += f ? " else " + top_if : top_if;

@@ -1,5 +1,6 @@
 let pause = true;
 let grid;
+let temp_grid;
 let cols;
 let rows;
 let cnv; // THIS IS THE CANVAS!!
@@ -7,7 +8,12 @@ let colors;
 let resolution = 10;
 let generationCount = 0;
 
+let custom_rules_mode = false;
+let custom_rules;
+let textarea_val;
+
 let active_rules; // rules to be applied
+let rules_str;
 let depth; // how far you should look outwards
 
 function make2DArray(cols, rows) {
@@ -24,6 +30,7 @@ function generateCells(grid, states) {
       grid[i][j] = floor(random(states));
     }
   }
+  temp_grid = grid;
 }
 
 function generateFireCells(grid) {
@@ -57,7 +64,12 @@ function determine_rules(states) {
   }
 }
 
-function setup(k = 2) {
+function setup(
+  k = 2,
+  newGrid = true,
+  randomBtn = false,
+  updateStateNum = false
+) {
   // get the number of states
   generationCount = 0;
   let states = parseInt(document.getElementById("states").value) || 2;
@@ -65,9 +77,14 @@ function setup(k = 2) {
   announceStates(states);
   announceDepth(depth);
   colors = colorBank(states);
-  //renderFormStates(states, "rulesform")
-  active_rules = determine_rules(states);
-  renderFormStatesFromActiveRules(JSON.stringify(switch_rules(states), null, '\t'), "rulesform");
+  textarea_val = !textarea_val
+    ? JSON.stringify(switch_rules(states), null, "\t")
+    : textarea_val;
+  renderFormStatesFromActiveRules(
+    JSON.stringify(switch_rules(states), null, "\t"),
+    randomBtn
+  );
+  active_rules = custom_rules_mode ? custom_rules : determine_rules(states);
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
   background(0);
@@ -77,7 +94,11 @@ function setup(k = 2) {
   if (states == 3) {
     generateFireCells(grid);
   } else {
-    generateCells(grid, states);
+    if (newGrid) {
+      generateCells(grid, states);
+    } else {
+      grid = temp_grid;
+    }
   }
   step();
 }
