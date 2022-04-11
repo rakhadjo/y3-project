@@ -15,6 +15,8 @@ function onPresetRadioChange(src) {
   let x;
   if (src.value == "firesim") {
     x = JSON.stringify(firesim, null, "\t")
+  } else if (src.value == "map_generation") {
+    x = JSON.stringify(map_generation, null, "\t")
   } else {
     x = JSON.stringify(conway_default, null, "\t")
   }
