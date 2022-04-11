@@ -23,6 +23,7 @@
     -->
     <script type="text/javascript" src="defaults/cgol.js"></script>
     <script type="text/javascript" src="defaults/firesim.js"></script>
+    <script type="text/javascript" src="defaults/mapgeneration.js"></script>
     <script type="text/javascript" src="modify.js"></script>
     <!--
       schemas data
@@ -91,7 +92,15 @@
       name="r_preset"
       onchange="onPresetRadioChange(this)"
     />
-    <label for="r_preset_1">Fire Sim (3 states)</label><br />
+    <label for="r_preset_2">Fire Sim (3 states)</label><br />
+    <input
+      type="radio"
+      id="r_preset_3"
+      value="map_generation"
+      name="r_preset"
+      onchange="onPresetRadioChange(this)"
+    />
+    <label for="r_preset_3">Map Builder</label><br />
     <div id="rulesform"></div>
   </body>
 </html>
