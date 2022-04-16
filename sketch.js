@@ -84,6 +84,7 @@ function setup(
     JSON.stringify(switch_rules(states), null, "\t"),
     randomBtn
   );
+  addTabListener();
   active_rules = custom_rules_mode ? custom_rules : determine_rules(states);
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
