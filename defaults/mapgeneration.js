@@ -2,7 +2,7 @@ let map_generation = {
     $_meta: {
       num_states: 2,
       colors: {
-        0: "red",
+        0: "blue",
         1: "green"
       }
     },
