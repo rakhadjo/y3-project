@@ -3,6 +3,20 @@ let schema = {
   properties: {
     $_meta: {
       type: "object",
+      additionalProperties: false,
+      properties: {
+        num_states: {
+          type: "integer"
+        }, colors: {
+          type: "object", 
+          patternProperties: {
+            "^.*$": {
+              type: "string"
+            }
+          }
+        },
+      },
+      required: ["num_states"]
     },
   },
   patternProperties: {
@@ -13,7 +27,7 @@ let schema = {
   $defs: {
     state: {
       type: "object",
-      additionalProperties: false,
+      additionalProperties: true,
       properties: {
         next: {
           type: "object",

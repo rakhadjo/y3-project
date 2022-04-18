@@ -38,37 +38,12 @@ function generateFireCells(grid) {
   grid[floor(random(cols))][floor(random(rows))] = 2;
 }
 
-function switch_rules(states) {
-  switch (states) {
-    case 3:
-      return firesim;
-    case 5:
-      return expt2;
-    case 6:
-      return fire_1;
-    default:
-      return conway_default;
-  }
-}
-
-function determine_rules(states) {
-  switch (states) {
-    case 3:
-      return create_function(firesim);
-    case 5:
-      return create_function(expt2);
-    case 6:
-      return fire_1;
-    default:
-      return create_function(conway_default);
-  }
-}
-
 function setup(
   k = 2,
   newGrid = true,
   randomBtn = false,
-  updateStateNum = false
+  updateStateNum = false,
+  fireMode = false
 ) {
   // get the number of states
   generationCount = 0;
@@ -76,23 +51,31 @@ function setup(
   depth = parseInt(document.getElementById("depth").value) || 0;
   announceStates(states);
   announceDepth(depth);
-  colors = colorBank(states);
   textarea_val = !textarea_val
-    ? JSON.stringify(switch_rules(states), null, "\t")
+    ? JSON.stringify(conway_default, null, "\t")
     : textarea_val;
-  renderFormStatesFromActiveRules(
-    JSON.stringify(switch_rules(states), null, "\t"),
-    randomBtn
+  renderFormStatesFromActiveRules(textarea_val, randomBtn);
+  colors = colorBank(
+    states,
+    fireMode,
+    JSON.parse(textarea_val)["$_meta"]["colors"]
   );
-  active_rules = custom_rules_mode ? custom_rules : determine_rules(states);
+  //console.log("textarea_val" + JSON.stringify(JSON.parse(textarea_val)["$_meta"]["colors"]));
+  addTabListener();
+  active_rules = custom_rules_mode
+    ? custom_rules
+    : create_function(conway_default);
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
   background(0);
   cols = floor(width / resolution);
   rows = floor(height / resolution);
   grid = make2DArray(cols, rows);
-  if (states == 3) {
+  if (fireMode && states > 2) {
     generateFireCells(grid);
+  } else if (fireMode && states <= 2) {
+    alert("Error: Please have 2 or more states");
+    grid = temp_grid;
   } else {
     if (newGrid) {
       generateCells(grid, states);

@@ -11,14 +11,34 @@ function renderFormStatesFromActiveRules(json_rules, randomButton) {
   document.getElementById("rulesform").innerHTML = formInput;
 }
 
+function addTabListener() {
+  document
+    .getElementById("rules_textarea")
+    .addEventListener("keydown", function (e) {
+      if (e.key == "Tab") {
+        e.preventDefault();
+        let sel_start = this.selectionStart;
+        let sel_end = this.selectionEnd;
+        // set textarea value to: text before caret + tab + text after caret
+        this.value =
+          this.value.substring(0, sel_start) +
+          "\t" +
+          this.value.substring(sel_end);
+
+        // put caret at right position again
+        this.selectionStart = this.selectionEnd = sel_start + 1;
+      }
+    });
+}
+
 function onPresetRadioChange(src) {
   let x;
   if (src.value == "firesim") {
-    x = JSON.stringify(firesim, null, "\t")
+    x = JSON.stringify(firesim, null, "\t");
   } else if (src.value == "map_generation") {
-    x = JSON.stringify(map_generation, null, "\t")
+    x = JSON.stringify(map_generation, null, "\t");
   } else {
-    x = JSON.stringify(conway_default, null, "\t")
+    x = JSON.stringify(conway_default, null, "\t");
   }
   renderFormStatesFromActiveRules(x, false);
 }
