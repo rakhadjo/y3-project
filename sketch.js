@@ -42,7 +42,8 @@ function setup(
   k = 2,
   newGrid = true,
   randomBtn = false,
-  updateStateNum = false
+  updateStateNum = false,
+  fireMode = false
 ) {
   // get the number of states
   generationCount = 0;
@@ -50,25 +51,29 @@ function setup(
   depth = parseInt(document.getElementById("depth").value) || 0;
   announceStates(states);
   announceDepth(depth);
-  colors = colorBank(states);
+  colors = colorBank(states, fireMode);
   textarea_val = !textarea_val
-    ? JSON.stringify(switch_rules(states), null, "\t")
+    ? JSON.stringify(conway_default, null, "\t")
     : textarea_val;
   renderFormStatesFromActiveRules(
-    JSON.stringify(switch_rules(states), null, "\t"),
+    textarea_val,
     randomBtn
   );
   addTabListener();
-  active_rules = custom_rules_mode ? custom_rules : determine_rules(states);
+  active_rules = custom_rules_mode ? custom_rules : create_function(conway_default);
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
   background(0);
   cols = floor(width / resolution);
   rows = floor(height / resolution);
   grid = make2DArray(cols, rows);
-  if (states == 3) {
+  if (fireMode && states > 2) {
     generateFireCells(grid);
-  } else {
+  } else if (fireMode && states <= 2) {
+    alert("Error: Please have 2 or more states")
+    grid = temp_grid;
+  } 
+  else {
     if (newGrid) {
       generateCells(grid, states);
     } else {
