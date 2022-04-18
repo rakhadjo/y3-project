@@ -14,6 +14,14 @@
  */
 
 let firesim = {
+  $_meta: {
+    num_states: 3,
+    colors: {
+      0: "black",
+      1: "green",
+      2: "red"
+    }
+  },
   default: {
     next: {
       conditional_requirements: [
