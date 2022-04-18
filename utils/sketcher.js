@@ -1,3 +1,13 @@
+const isColor = (strColor) => {
+  const s = new Option().style;
+  s.color = strColor;
+  return s.color !== "";
+};
+
+function genRandomColor() {
+  return [floor(random(255)), floor(random(255)), floor(random(255))];
+}
+
 // generate random colors according to number of states
 function colorBank(states, fireMode = false) {
   if (states == 2) {
