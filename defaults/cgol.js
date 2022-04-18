@@ -1,7 +1,10 @@
 let conway_default = {
   $_meta: {
     num_states: 2,
-    colors: {}
+    colors: {
+      0: "black",
+      1: "white"
+    }
   },
   0: {
     next: {
