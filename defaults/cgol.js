@@ -1,5 +1,8 @@
 let conway_default = {
-  $_meta: {},
+  $_meta: {
+    num_states: 2,
+    colors: {}
+  },
   0: {
     next: {
       conditional_requirements: [

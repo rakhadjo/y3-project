@@ -14,7 +14,9 @@
  */
 
 let firesim = {
-  $_meta: {},
+  $_meta: {
+    num_states: 3,
+  },
   default: {
     next: {
       conditional_requirements: [
