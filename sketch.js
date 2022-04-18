@@ -51,16 +51,20 @@ function setup(
   depth = parseInt(document.getElementById("depth").value) || 0;
   announceStates(states);
   announceDepth(depth);
-  colors = colorBank(states, fireMode);
   textarea_val = !textarea_val
     ? JSON.stringify(conway_default, null, "\t")
     : textarea_val;
-  renderFormStatesFromActiveRules(
-    textarea_val,
-    randomBtn
+  renderFormStatesFromActiveRules(textarea_val, randomBtn);
+  colors = colorBank(
+    states,
+    fireMode,
+    JSON.parse(textarea_val)["$_meta"]["colors"]
   );
+  //console.log("textarea_val" + JSON.stringify(JSON.parse(textarea_val)["$_meta"]["colors"]));
   addTabListener();
-  active_rules = custom_rules_mode ? custom_rules : create_function(conway_default);
+  active_rules = custom_rules_mode
+    ? custom_rules
+    : create_function(conway_default);
   cnv = createCanvas(windowWidth / 2, 600);
   centerCanvas();
   background(0);
@@ -70,10 +74,9 @@ function setup(
   if (fireMode && states > 2) {
     generateFireCells(grid);
   } else if (fireMode && states <= 2) {
-    alert("Error: Please have 2 or more states")
+    alert("Error: Please have 2 or more states");
     grid = temp_grid;
-  } 
-  else {
+  } else {
     if (newGrid) {
       generateCells(grid, states);
     } else {
