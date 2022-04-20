@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Rules Help</title>
+      <!-- Latest compiled and minified CSS -->
+      <link
+         rel="stylesheet"
+         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+         />
+      <link rel="stylesheet" href="index.css" />
+      <!--
+         utility modules
+         -->
+      <script type="text/javascript" src="utils/html-io.js"></script>
+   </head>
+   <body>
+      <h1>Cellular Automatas & Tool Primer</h1>
+      <button onclick="showMain()">Back to Main</button> <br />
+      <br />
+      <h2>What is a Cellular Automata?</h2>
+      <p>Cellular Automata (CA)</p>
+      <h2>How do the Rules Work?</h2>
+      <p>
+         The rules may look daunting at first - but overall it's pretty
+         straightforward. They take the format of a JSON object.  
+         <br />
+      <ul>
+         <li>General Structure of the Rules</li>
+         The general structure of the prescribed rules take the form as such: <br />
+         <textarea readonly rows="8", cols="60">
+    {
+      $_meta: { ... },
+      default: { ... },
+      0: { ... },
+      1: { ... },
+      ...
+    }
+      </textarea>
+         <br />
+         There should be at least two 'keys' in that object, described as follows:    
+         <li>$_meta</li>
+         The $_meta tag is a mandatory 'key' that contains two objects: 'states' and 'colors'. <br />
+         <textarea readonly rows="9" cols="40">
+    $_meta: {
+      "states": 3,
+      "colors": {
+        0: "red",
+        1: 255,
+        2: "#FF0000"
+      }
+    }
+        </textarea>
+         <p>States simply contain an integer indicating how many states are in this CA. Colors, on the other hand, is another JSON object that maps which color goes to which state. Each key should be a number, and the values held can take the form of strings or integers. Colors can be provided in verbal form, rgb triple, or hex. If no colour is supplied, a random one will be allocated</p>
+         <li>default</li>
+         The default tag (and other individual states) are 'keys' containing rules how each state should behave. It contains the 'next' key, that in turn contains three different properties:<br />
+         <textarea readonly rows="8" cols="60">
+    default: {
+      "next": {
+        "conditional_requirements": [{ ... }],
+        "satisfied": 1,
+        "else": 0
+      }
+    }
+        </textarea>
+         <br /> <br />
+         Conditional requirements is a list of objects describing each requirement needed to transition to the 'satisfied' state. If any condition is not satisfied, the next state will transition to the 'else' state. 
+         <br /> <br />
+         <li>conditional_requirements</li>
+         <textarea readonly rows="30" cols="60">
+          
+    conditional_requirements: [
+    {
+      type: "totalling",
+      neighbour_state: 1,
+      total: [3],
+    }, 
+    {
+      type: "probability",
+      p: 1,
+    },
+    {
+      type: "total-p",
+      neighbour_state: 2,
+      total: [1, 2, 3, 4],
+      p: 0.8,
+    },
+    {
+      type: "expression",
+      lhs: {
+        neighbour_states: [3, 4],
+      },
+      cmp: ">",
+      rhs: {
+        neighbour_states: [1, 2],
+      },
+    }
+    ]
+        </textarea>
+         <div>
+            <table style="table-layout: fixed; width: 700px; " height="100" id="adjustments">
+               <tr>
+                  <th>Type</th>
+                  <th>Additional Required Arguments</th>
+               </tr>
+               <tr>
+                  <td>"totalling"</td>
+                  <td>
+                     neighbour_state (int) <br />
+                     total (array[int])
+                  </td>
+               </tr>
+               <tr>
+                  <td>"probability"</td>
+                  <td>
+                     p (int) <br />
+                  </td>
+               </tr>
+               <tr>
+                  <td>"total-p"</td>
+                  <td>
+                     neighbour_state (int) <br />
+                     total (array[int]) <br />
+                     p (int)
+                  </td>
+               </tr>
+               <tr>
+                  <td>"expression"</td>
+                  <td>
+                     lhs (object: neighbour_states (array(list))) <br />
+                     cmp (enum: ["&lt", "&gt", "="])
+                     rhs (object: neighbour_states (array(list)))
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </ul>
+      </p>
+      <h3>How do the Rules Work? (2 - Technical Stuff)</h3>
+      <p>
+         The rules in the text box are validated against a JSON Schema. Feedback in
+         the form of an HTML alert is given whenever something isn't quite right
+         according to its format.
+      </p>
+      <h2>All good? Let's go back to the tool!</h2>
+      <button onclick="showMain()">Back to Main</button> <br />
+      <br />
+   </body>
+</html>

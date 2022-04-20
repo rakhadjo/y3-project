@@ -26,3 +26,11 @@ function centerCanvas() {
 function windowResized() {
   centerCanvas();
 }
+
+function showHelp() {
+  window.open('/help.html', '_blank');
+}
+
+function showMain() {
+  window.open('/index.html', '_blank');
+}
