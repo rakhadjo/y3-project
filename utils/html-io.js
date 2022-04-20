@@ -2,20 +2,6 @@ function setPause() {
   pause = !pause;
 }
 
-function setFire() {
-  // set 3 states
-  states = 3;
-  // set fire colors
-  announceColors("Forest Fire Mode");
-  colors = [
-    [0, 0, 0],
-    [255, 0, 0],
-    [32, 168, 5],
-  ];
-  // determine rules
-  active_rules = create_function(firesim);
-}
-
 function announceColors(colors) {
   document.getElementById("colors_bank").innerHTML = colors;
 }
