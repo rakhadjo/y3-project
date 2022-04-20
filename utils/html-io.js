@@ -44,3 +44,7 @@ function windowResized() {
 function showHelp() {
   window.open('/help.html', '_blank');
 }
+
+function showMain() {
+  window.open('/index.html', '_blank');
+}
