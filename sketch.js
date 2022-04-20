@@ -47,8 +47,14 @@ function setup(
 ) {
   // get the number of states
   generationCount = 0;
-  let states = parseInt(document.getElementById("states").value) || 2;
-  depth = parseInt(document.getElementById("depth").value) || 0;
+  let states =
+    parseInt(document.getElementById("states").value) > 1
+      ? parseInt(document.getElementById("states").value)
+      : 2;
+  depth =
+    parseInt(document.getElementById("depth").value) >= 0
+      ? parseInt(document.getElementById("depth").value)
+      : 0;
   announceStates(states);
   announceDepth(depth);
   textarea_val = !textarea_val
