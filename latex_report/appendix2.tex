@@ -1,0 +1,132 @@
+\chapter{Default Rules}
+\label{appendix:default_ca_rules}
+
+\section{Conway's Game of Life}
+\label{appendix:default_cgol}
+\begin{verbatim}
+    {
+        "$_meta": {
+            "num_states": 2,
+            "colors": {
+                "0": "black",
+                "1": "white"
+            }
+        },
+        "0": {
+            "next": {
+                "conditional_requirements": [
+                    {
+                        "type": "totalling",
+                        "neighbour_state": 1,
+                        "total": [
+                            3
+                        ]
+                    }
+                ],
+                "satisfied": 1,
+                "else": 0
+            }
+        },
+        "default": {
+            "next": {
+                "conditional_requirements": [
+                    {
+                        "type": "totalling",
+                        "neighbour_state": 1,
+                        "total": [
+                            2,
+                            3
+                        ]
+                    }
+                ],
+                "satisfied": 1,
+                "else": 0
+            }
+        }
+    }
+  
+\end{verbatim}
+
+\section{Forest Fire Simulator}
+\begin{verbatim}
+{
+    "$_meta": {
+        "num_states": 3,
+        "colors": {
+            "0": "black",
+            "1": "green",
+            "2": "red"
+        }
+    },
+    "1": {
+        "next": {
+            "conditional_requirements": [
+                {
+                    "type": "total-p",
+                    "neighbour_state": 2,
+                    "total": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "p": 1
+                },
+                {
+                    "type": "total-p",
+                    "neighbour_state": 2,
+                    "total": [
+                        5, 6, 7, 8
+                ],
+                    "p": 0.8
+                }
+            ],
+            "satisfied": 2,
+            "else": 1
+        }
+    },
+    "default": {
+        "next": {
+            "conditional_requirements": [
+                {
+                    "type": "probability",
+                    "p": 1
+                }
+            ],
+            "satisfied": 0,
+            "else": 0
+        }
+    }
+}
+
+\end{verbatim}
+
+\section{Game Development Map Generation}
+\label{appendix:gamedevmap_rules}
+\begin{verbatim}
+{
+    "$_meta": {
+        "num_states": 2,
+        "colors": {
+            "0": "blue",
+            "1": "green"
+        }
+    },
+    "default": {
+        "next": {
+            "conditional_requirements": [
+                {
+                    "type": "totalling",
+                    "neighbour_state": 1,
+                    "total": [
+                        1, 2, 3, 4
+                    ]
+                }
+            ],
+            "satisfied": 0,
+            "else": 1
+        }
+    }
+}
+  
+\end{verbatim}
