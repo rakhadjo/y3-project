@@ -1,7 +1,7 @@
 # Cellular Automaton Third Year Project at The University of Manchester
 
 Learning platform on Cellular Automatons & its relation with Turing Machines & Real Life.
-Implemented in HTML, CSS, JavaScript as an interactive web page
+Implemented in HTML, CSS, JavaScript as an interactive web page. Latex Source files for project write up can be found in the [`latex_report`](./latex_report) folder and the report write-up itself is [here](./report.pdf) at the root of the tree.
 
 > <b>Project Brief</b>: <br />  <br />
 > Conway's Game of Life (CGoL) is a fascinating alternative to Turing machines: like Turing machines, CGoL is universal, i.e., it captures the essence of computability/decidability. It also is very simple and looks like an 8 bit Arcade game. <br /> <br />
